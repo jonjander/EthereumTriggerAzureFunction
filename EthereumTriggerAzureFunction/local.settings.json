@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "TestContract:ABI": "[{\"constant\":false,\"inputs\":[{\"name\":\"_type\",\"type\":\"string\"},{\"name\":\"_action\",\"type\":\"string\"},{\"name\":\"_pin\",\"type\":\"uint256\"}],\"name\":\"giveMeTheMessage\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_n\",\"type\":\"uint256\"}],\"name\":\"setN\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_target\",\"type\":\"address\"}],\"name\":\"setTarget\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"_n\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"from\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"_type\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"_action\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"_pin\",\"type\":\"uint256\"}],\"name\":\"SuccessfulAttempt\",\"type\":\"event\"},{\"constant\":true,\"inputs\":[],\"name\":\"getN\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getTarget\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}]",
+    "TestContract:Address": "0x3dda198daaac640a6dc9426b6b33b7bcd1013c16",
+    "RopstenNetworkEndpoint": "https://ropsten-rpc.linkpool.io/"
+  }
+}
