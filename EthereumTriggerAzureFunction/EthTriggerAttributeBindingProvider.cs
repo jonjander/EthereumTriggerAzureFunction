@@ -47,9 +47,11 @@ namespace EthereumTriggerAzureFunction {
 
             Contract contract = web3.Eth.GetContract(contractABI, contractAddress);
 
+            var filterClass = (IEventFilter)Activator.CreateInstance(Type.GetType(triggerAttribute.TypeName));
+
             return Task.FromResult<ITriggerBinding>(
-                new EthTriggerBinding(parameter, web3, contract)
-            );
+                new EthTriggerBinding(parameter, web3, contract, filterClass.Filter)
+            ); ;
         }
 
     }

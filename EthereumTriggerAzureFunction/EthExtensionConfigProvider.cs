@@ -1,15 +1,8 @@
 ﻿using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Description;
-using Microsoft.Azure.WebJobs.Host.Bindings;
 using Microsoft.Azure.WebJobs.Host.Config;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Nethereum.Contracts;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EthereumTriggerAzureFunction {
 
@@ -32,8 +25,9 @@ namespace EthereumTriggerAzureFunction {
         public void Initialize(ExtensionConfigContext context) {
 
             var triggerAttributeBindingRule = context.AddBindingRule<EthTriggerAttribute>();
-            triggerAttributeBindingRule.BindToTrigger<EventLog<MyEvent>>(
-                new EthTriggerAttributeBindingProvider(_configuration, _nameResolver, _loggerFactory)
+            var ethTriggerAttributeBindingProvider = new EthTriggerAttributeBindingProvider(_configuration, _nameResolver, _loggerFactory);
+            triggerAttributeBindingRule.BindToTrigger<EventResult>(
+                ethTriggerAttributeBindingProvider
             );
             
         }
