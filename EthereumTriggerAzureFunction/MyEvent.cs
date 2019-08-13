@@ -22,6 +22,13 @@ namespace EthereumTriggerAzureFunction {
         [Parameter("int", "_pin", 4, false)]
         public int Pin { get; set; }
 
+
+        /// <summary>
+        /// Filter contract log to find event changes
+        /// This method is called from the Trigger listner and must exist in all event classes
+        /// </summary>
+        /// <param name="_contract">target contract</param>
+        /// <returns>Log, event och number of hits</returns>
         public async Task<(string, List<(FilterLog, string)>, int)> Filter(Contract _contract) {
             var Event = _contract.GetEvent("SuccessfulAttempt");
             var filterAll = await Event.CreateFilterAsync();
