@@ -37,31 +37,5 @@ namespace EthereumTriggerAzureFunction {
             }
             return (JsonConvert.SerializeObject(logis), results, logis.Count);
         }
-
-    }
-
-    public interface IEventFilter {
-        Task<(string, List<(FilterLog, string)>, int)> Filter(Contract _contract);
-    }
-
-
-    public class EventResult {
-        public EventResult(string _event, FilterLog _log) {
-            EventString = _event;
-            LogString = JsonConvert.SerializeObject(_log);
-        }
-
-        public EventResult() {
-
-        }
-
-        public (T _Event, FilterLog _Log) GetEvent<T>(){
-            return (
-                JsonConvert.DeserializeObject<T>(EventString),
-                JsonConvert.DeserializeObject<FilterLog>(LogString)) ;
-        }
-
-        public string EventString { get; set; }
-        public string LogString { get; set; }
     }
 }
