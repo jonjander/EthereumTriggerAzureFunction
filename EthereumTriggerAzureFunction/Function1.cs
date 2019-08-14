@@ -10,7 +10,7 @@ namespace EthereumTriggerAzureFunction {
 
         [FunctionName(nameof(EthTrigger))]
         public static async Task EthTrigger(
-            [EthTrigger("TestContract:ABI", "TestContract:Address", "RopstenNetworkEndpoint", "EthereumTriggerAzureFunction.MyEventz")]EventResult ethEvent,
+            [EthTrigger("TestContract:ABI", "TestContract:Address", "RopstenNetworkEndpoint", "EthereumTriggerAzureFunction.MyEvent")]EventResult ethEvent,
             ILogger log
             )
         {
