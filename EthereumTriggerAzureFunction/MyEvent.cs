@@ -4,6 +4,8 @@ using Nethereum.RPC.Eth.DTOs;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +24,7 @@ namespace EthereumTriggerAzureFunction {
         [Parameter("int", "_pin", 4, false)]
         public int Pin { get; set; }
 
+        private Type thisType => MethodBase.GetCurrentMethod().DeclaringType;
 
         /// <summary>
         /// Filter contract log to find event changes
@@ -30,19 +33,16 @@ namespace EthereumTriggerAzureFunction {
         /// <param name="_contract">target contract</param>
         /// <returns>Log, event och number of hits</returns>
         public async Task<(string, List<(FilterLog, string)>, int)> Filter(Contract _contract) {
-            var Event = _contract.GetEvent("SuccessfulAttempt");
-            var filterAll = await Event.CreateFilterAsync();
+            var dnAttribute = thisType.GetCustomAttributes(typeof(EventAttribute), true).FirstOrDefault() as EventAttribute;
+            var contractEvent = _contract.GetEvent(dnAttribute.Name);
+            var filterAll = await contractEvent.CreateFilterAsync();
             await Task.Delay(500);
-            var logis = await Event.GetFilterChanges<MyEventz>(filterAll);
-            
+            var filterResult = await contractEvent.GetFilterChanges<MyEventz>(filterAll);
             var results = new List<(FilterLog, string)>();
-            foreach(var item in logis) {
-                results.Add((
-                    item.Log,
-                    JsonConvert.SerializeObject(item.Event)
-                    ));
+            foreach(var item in filterResult) {
+                results.Add((item.Log,JsonConvert.SerializeObject(item.Event)));
             }
-            return (JsonConvert.SerializeObject(logis), results, logis.Count);
+            return (JsonConvert.SerializeObject(filterResult), results, filterResult.Count);
         }
     }
 }
