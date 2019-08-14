@@ -14,7 +14,7 @@ namespace EthereumTriggerAzureFunction {
             ILogger log
             )
         {
-            var dc = ethEvent.GetEvent<MyEventz>();
+            var dc = ethEvent.GetEvent<MyEvent>();
             log.LogInformation(dc._Log.BlockNumber + ": " + dc._Event.Pin);
             await Task.Delay(1);
         }

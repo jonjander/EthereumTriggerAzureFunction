@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EthereumTriggerAzureFunction {
     [Event("SuccessfulAttempt")]
-    public class MyEventz : IEventFilter {
+    public class MyEvent : IEventFilter {
         [Parameter("address", "from", 1, false)]
         public string Sender { get; set; }
 
@@ -37,7 +37,7 @@ namespace EthereumTriggerAzureFunction {
             var contractEvent = _contract.GetEvent(dnAttribute.Name);
             var filterAll = await contractEvent.CreateFilterAsync();
             await Task.Delay(500);
-            var filterResult = await contractEvent.GetFilterChanges<MyEventz>(filterAll);
+            var filterResult = await contractEvent.GetFilterChanges<MyEvent>(filterAll);
             var results = new List<(FilterLog, string)>();
             foreach(var item in filterResult) {
                 results.Add((item.Log,JsonConvert.SerializeObject(item.Event)));
