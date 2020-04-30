@@ -51,7 +51,7 @@ namespace EthereumTriggerAzureFunction {
 
             return Task.FromResult<ITriggerBinding>(
                 new EthTriggerBinding(parameter, web3, contract, filterClass.Filter)
-            ); ;
+            );
         }
 
     }

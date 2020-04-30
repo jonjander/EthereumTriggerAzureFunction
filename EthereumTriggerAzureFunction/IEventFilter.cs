@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 namespace EthereumTriggerAzureFunction {
     public interface IEventFilter {
+        System.Type ThisType { get; }
+
         Task<(string, List<(FilterLog, string)>, int)> Filter(Contract _contract);
     }
 }

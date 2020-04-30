@@ -46,9 +46,9 @@ namespace EthereumTriggerAzureFunction {
         public Task<IListener> CreateListenerAsync(ListenerFactoryContext context) {
 
 
-        return Task.FromResult<IListener>(
-            new EthTriggerListener(context.Executor, _web3, _contract, _filterFunction)
-        );
+            return Task.FromResult<IListener>(
+                new EthTriggerListener(context.Executor, _web3, _contract, _filterFunction)
+            );
         }
 
         public ParameterDescriptor ToParameterDescriptor() {

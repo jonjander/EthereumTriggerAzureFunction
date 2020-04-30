@@ -24,7 +24,7 @@ namespace EthereumTriggerAzureFunction {
         [Parameter("int", "_pin", 4, false)]
         public int Pin { get; set; }
 
-        private Type thisType => MethodBase.GetCurrentMethod().DeclaringType;
+        public Type ThisType => MethodBase.GetCurrentMethod().DeclaringType;
 
         /// <summary>
         /// Filter contract log to find event changes
@@ -33,7 +33,7 @@ namespace EthereumTriggerAzureFunction {
         /// <param name="_contract">target contract</param>
         /// <returns>Log, event och number of hits</returns>
         public async Task<(string, List<(FilterLog, string)>, int)> Filter(Contract _contract) {
-            var dnAttribute = thisType.GetCustomAttributes(typeof(EventAttribute), true).FirstOrDefault() as EventAttribute;
+            var dnAttribute = ThisType.GetCustomAttributes(typeof(EventAttribute), true).FirstOrDefault() as EventAttribute;
             var contractEvent = _contract.GetEvent(dnAttribute.Name);
             var filterAll = await contractEvent.CreateFilterAsync();
             await Task.Delay(500);
